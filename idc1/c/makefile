@@ -1,4 +1,4 @@
-PUBINCL = -I/cpp-weather-data-center/public
+PUBINCL = -I/root/cpp-weather-data-center/public
 
 PUBCPP = /root/cpp-weather-data-center/public/_public.cpp
 

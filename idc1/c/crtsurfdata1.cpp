@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     if (argc!=4)
     {
         printf("Using: ./crtsurfdata1 infile outpath logfile\n");
-        printf("Example:/project/idc1/bin/crtsurfdata1 /project/idc1/ini/stcode.ini /tmp/surfdata /log/idc\n")
+        printf("Example:/project/idc1/bin/crtsurfdata1 /project/idc1/ini/stcode.ini /tmp/surfdata /log/idc\n");
         // remember to give access to ./log to user 
         // chown -R mo:dba /log
 
