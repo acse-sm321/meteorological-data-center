@@ -12,6 +12,9 @@
 #include "_public.h"
 
 
+CLogFile logfile;
+
+
 int main(int argc, char *argv[])
 {
     /* code */
@@ -28,5 +31,17 @@ int main(int argc, char *argv[])
 
         return -1;
     }
+
+    // open log file
+    if(logfile.Open(argv[3]==false))
+    {
+        printf("logfile.Open(%s) failed.\n",argv[3]);
+        return -1;
+    }
+
+    logfile.Write("crtsurfdata1 is running ... \n");
+    // work code
+    logfile.Write("crtsurfdata1 has stopped ... \n");
+    
     return 0;
 }
