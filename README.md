@@ -1,52 +1,26 @@
 # cpp-weather-data-center
-A virtual data centre for (big) weather data implemented by C++.
+
+## About
+A implementation for weather data centre written by C++.
 ```
 .
 ├── idc
-│   ├── bin
-│   ├── c
-│   ├── ini
-│   └── sql
-├── idc1
-│   ├── bin
-│   ├── ini
-│   └── sql
 ├── pthread
 ├── public
-│   ├── db
-│   │   ├── mysql
-│   │   ├── oracle
-│   │   └── postgresql
-│   ├── demo
-│   ├── ftplib.c
-│   ├── ftplib.h
-│   ├── ini
-│   ├── lib_public.a
-│   ├── lib_public.so
-│   ├── libftp.a
-│   ├── libftp.so
-│   ├── makefile
-│   └── socket
-├── tools
-│   ├── bin
-│   ├── c
-│   └── ini
-└── tools1
-    ├── bin
-    └── c
+└── tools
 ```
-- Tech stack: 
+- Techniques: 
     - C++
     - MySQL
     - PostgreSQL
-    - Web ... 
+    - other ...
 
 ## Configuration
-Default C++ standard for this project is C++20. Built the files with g++ (GCC):
+Pre-assume C++ standard for this project is C++20. Built the files with g++ (GCC):
 ```
 g++ (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
 ```
-All the datasets are collected from the internet, links will be provided as references. 
+All the datasets (both observed & synthetic) are collected from the internet and will be listed in references.
 
 ## Usage
 ```
@@ -63,6 +37,8 @@ Feel free to fork and make pull requests. Issues and comments are welcomed.
 My family and friends.
 
 ## References
+- Dataset
+- Web
 
 ## License
 - [GNU General Public License v3.0](https://github.com/acse-sm321/cpp-weather-data-center/blob/main/LICENSE)
