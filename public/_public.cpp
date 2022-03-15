@@ -1,7 +1,13 @@
-/*****************************************************************************************/
-/*   程序名：_public.cpp，此程序是开发框架公用函数和类的定义文件。                       */
-/*   作者：吴从周                                                                        */
-/*****************************************************************************************/
+/**
+ * @file _public.cpp
+ * @author Shuheng Mo
+ * @brief public util functions regarding file operations
+ * @version 0.1
+ * @date 2022-03-15
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "_public.h"  
 
@@ -1082,7 +1088,8 @@ void LocalTime(char *stime,const char *fmt,const int timetvl)
   timetostr(timer,stime,fmt);
 }
 
-
+/* CLogFile */
+/* Writing running log to .log file*/
 CLogFile::CLogFile(const long MaxLogSize)
 {
   m_tracefp = 0;
@@ -1093,14 +1100,14 @@ CLogFile::CLogFile(const long MaxLogSize)
   m_MaxLogSize=MaxLogSize;
   if (m_MaxLogSize<10) m_MaxLogSize=10;
 
-  // pthread_pin_init(&spin,0);  // 初学暂时不要关心这行代码。
+  // pthread_pin_init(&spin,0);
 }
 
 CLogFile::~CLogFile()
 {
   Close();
 
-  // pthread_spin_destroy(&spin);  // 初学暂时不要关心这行代码。
+  // pthread_spin_destroy(&spin);
 }
 
 void CLogFile::Close()

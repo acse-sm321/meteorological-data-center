@@ -1,13 +1,14 @@
-# cpp-weather-data-center
+# Meteorological-data-center
+A implementation for weather data centre written by C++. Inspired by the idea mentioned **[1]**, this project implement the simulation of data centre among geo-destributed nodes (data centers) and transfer/dispatch meteorological data.
 
 ## About
-A implementation for weather data centre written by C++.
 ```
-.
-├── idc
-├── pthread
-├── public
-└── tools
+./meteorological-data-center
+|
+├── idc     <==> core logics of intermediate data center
+├── pthread <==> thread writen by C++
+├── public  <==> common file functions and ftp remote access
+└── tools   <==> supplementary tools
 ```
 - Techniques: 
     - C++
@@ -37,8 +38,8 @@ Feel free to fork and make pull requests. Issues and comments are welcomed.
 My family and friends.
 
 ## References
-- Dataset
-- Web
+**[1]** Taheri, Somayyeh, Maziar Goudarzi, and Osamu Yoshie. “Learning-Based Power Prediction for Geo-Distributed Data Centers: Weather Parameter Analysis.” Journal of big data 7.1 (2020): 1–16. Web.
+
 
 ## License
 - [GNU General Public License v3.0](https://github.com/acse-sm321/cpp-weather-data-center/blob/main/LICENSE)

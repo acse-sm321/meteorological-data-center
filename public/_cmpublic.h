@@ -1,14 +1,20 @@
-/****************************************************************************************
- *   程序名：_cmpublic.h，此程序是开发框架公用头文件，包含了应用开发常用的头文件。      
- *   作者：吴从周 
-*****************************************************************************************/
+/**
+ * @file _cmpublic.h
+ * @author Shuheng Mo
+ * @brief Common public headers used in the project
+ * @version 0.1
+ * @date 2022-03-15
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 
 #ifndef _cmpublic_H
 #define _cmpublic_H
 
-#include <stdio.h>
-#include <utime.h>
-#include <string.h>
+#include <stdio.h>  // standard input and output
+#include <utime.h>  // time
+#include <string.h> // string
 #include <strings.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -52,4 +58,3 @@
 using namespace std;
 
 #endif
-
