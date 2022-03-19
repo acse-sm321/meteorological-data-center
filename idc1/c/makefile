@@ -1,6 +1,6 @@
-PUBINCL = -I/root/cpp-weather-data-center/public
+PUBINCL = -I/root/meteorological-data-center/public
 
-PUBCPP = /root/cpp-weather-data-center/public/_public.cpp
+PUBCPP = /root/meteorological-data-center/public/_public.cpp
 
 CFLAGS = -g
 
@@ -11,8 +11,9 @@ crtsurfdata1:crtsurfdata1.cpp
 	cp crtsurfdata1 ../bin/.
 
 crtsurfdata2:crtsurfdata2.cpp
-	g++ $(CFLAGS) -o crtsurfdata1 crtsurfdata2.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
+	g++ $(CFLAGS) -o crtsurfdata2 crtsurfdata2.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
 	cp crtsurfdata1 ../bin/.
 
 clean:
 	rm crtsurfdata1
+	rm crtsurfdata2
