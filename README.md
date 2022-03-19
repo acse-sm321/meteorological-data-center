@@ -1,5 +1,5 @@
 # Meteorological-data-center
-A implementation for weather data centre written by C++. Inspired by the idea mentioned **[1]**, this project implement the simulation of data centre among geo-destributed nodes (data centers) and transfer/dispatch meteorological data.
+A implementation for weather data centre written by C++. Inspired by the idea mentioned in **[1]**, this project implement the simulation of data center among geo-destributed nodes (data centers) and transfer/dispatch meteorological data.
 
 ## About
 ```
