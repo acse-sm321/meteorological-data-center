@@ -43,7 +43,7 @@ bool LoadSTCode(const char *infile)
     // read the file with read only mode
     if (File.Open(infile, "r") == false)
     {
-        logfile.Write("File.Open(%s)")
+        logfile.Write("File.Open(%s)");
     }
 
     while (true)
@@ -53,7 +53,7 @@ bool LoadSTCode(const char *infile)
             break;
 
         // print out the data from file
-        logfile.Write("=%s=\n", strBuffer)
+        logfile.Write("=%s=\n", strBuffer);
 
         // split the line loaded
         CmdStr.SplitToCmd(strBuffer, ",");
@@ -62,12 +62,12 @@ bool LoadSTCode(const char *infile)
         CmdStr.GetValue(0, stcode.provname, 30);
         CmdStr.GetValue(1, stcode.obtid, 10);
         CmdStr.GetValue(2, stcode.obname, 30);
-        CmdStr.GetValue(3, stcode.lat);
-        CmdStr.GetValue(4, stcode.lon);
-        CmdStr.GetValue(5, stcode.height);
+        CmdStr.GetValue(3, &stcode.lat);
+        CmdStr.GetValue(4, &stcode.lon);
+        CmdStr.GetValue(5, &stcode.height);
 
         // pass it to container
-        vstcode.push_back(st_stcode);
+        vstcode.push_back(stcode);
     }
     return true;
 }
@@ -77,8 +77,8 @@ int main(int argc, char *argv[])
     /* code */
     if (argc != 4)
     {
-        printf("Using: ./crtsurfdata1 infile outpath logfile\n");
-        printf("Example: /project/idc1/bin/crtsurfdata1 /project/idc1/ini/stcode.ini /tmp/surfdata /project/idc1/log/idc/crtsurfdata1.log\n");
+        printf("Using: ./crtsurfdata2 infile outpath logfile\n");
+        printf("Example: /project/idc1/bin/crtsurfdata2 /project/idc1/ini/stcode.ini /tmp/surfdata /project/idc1/log/idc/crtsurfdata2.log\n");
         // remember to give access to ./log to user
         // chown -R mo:dba /log
 
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
     }
 
     logfile.Write("crtsurfdata2 is running ... \n");
-    if (LoadSTCode(argv[1] == false))
+    if (LoadSTCode(argv[1]) == false)
         return -1;
 
     logfile.Write("crtsurfdata2 has stopped ... \n");
