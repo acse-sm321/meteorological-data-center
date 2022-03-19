@@ -16,7 +16,7 @@ struct st_stcode
 {
     char provname[31]; // province
     char obtid[11];    // station id
-    char obname[31];   // station name
+    char obtname[31];   // station name
     double lat;        // latitude
     double lon;        // longitude
     double height;     // height of station
@@ -56,18 +56,27 @@ bool LoadSTCode(const char *infile)
         logfile.Write("=%s=\n", strBuffer);
 
         // split the line loaded
-        CmdStr.SplitToCmd(strBuffer, ",");
+        CmdStr.SplitToCmd(strBuffer, ",",true);
+
+        // if we encounter some invalid lines, just drop out
+        if(CmdStr.CmdCount()!=6) continue;
 
         // pass the data to a struct
         CmdStr.GetValue(0, stcode.provname, 30);
         CmdStr.GetValue(1, stcode.obtid, 10);
-        CmdStr.GetValue(2, stcode.obname, 30);
+        CmdStr.GetValue(2, stcode.obtname, 30);
         CmdStr.GetValue(3, &stcode.lat);
         CmdStr.GetValue(4, &stcode.lon);
         CmdStr.GetValue(5, &stcode.height);
 
         // pass it to container
         vstcode.push_back(stcode);
+          
+        //  Print out the data loaded from the file
+        // for (int ii=0;ii<vstcode.size();ii++)
+        // logfile.Write("provname=%s,obtid=%s,obtname=%s,lat=%.2f,lon=%.2f,height=%.2f\n",\
+        //            vstcode[ii].provname,vstcode[ii].obtid,vstcode[ii].obtname,vstcode[ii].lat,\
+        //            vstcode[ii].lon,vstcode[ii].height);
     }
     return true;
 }
