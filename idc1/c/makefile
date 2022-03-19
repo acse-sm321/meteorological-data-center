@@ -11,8 +11,8 @@ crtsurfdata1:crtsurfdata1.cpp
 	cp crtsurfdata1 ../bin/.
 
 crtsurfdata2:crtsurfdata2.cpp
-g++ $(CFLAGS) -o crtsurfdata1 crtsurfdata2.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
-cp crtsurfdata1 ../bin/.
+	g++ $(CFLAGS) -o crtsurfdata1 crtsurfdata2.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
+	cp crtsurfdata1 ../bin/.
 
 clean:
 	rm crtsurfdata1
