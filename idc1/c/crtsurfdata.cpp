@@ -58,15 +58,15 @@ int main(int argc, char *argv[])
     /* code */
     if (argc != 5)
     {
-        printf("Using: ./crtsurfdata infile outpath logfile datafmt\n");
-        printf("Example: ../bin/crtsurfdata ../ini/stcode.ini ../tmp/surfdata ../log/idc/crtsurfdata.log xml,json,csv\n");
+        printf("[INFO] Using: ./crtsurfdata infile outpath logfile datafmt\n");
+        printf("[INFO] Example: ../bin/crtsurfdata ../ini/stcode.ini ../tmp/surfdata ../log/idc/crtsurfdata.log xml,json,csv\n");
         // remember to give access to ./log to user
         // chown -R mo:dba /log
 
-        printf("infile -> input station data file\n");
-        printf("outpath -> generated synthetic observation data file location\n");
-        printf("logfile -> running log of current program\n");
-        printf("datafmt -> file of the output data file, xml,json,csv supported and split by \',\' \n");
+        printf("[INFO] infile -> input station data file\n");
+        printf("[INFO] outpath -> generated synthetic observation data file location\n");
+        printf("[INFO] logfile -> running log of current program\n");
+        printf("[INFO] datafmt -> file of the output data file, xml,json,csv supported and split by \',\' \n");
 
         return -1;
     }
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    logfile.Write("crtsurfdata5 is running ... \n");
+    logfile.Write("[INFO] crtsurfdata is running ... \n");
 
     // pass the data from files into vstcode container
     if (LoadSTCode(argv[1]) == false) return -1;
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
     if(strstr(argv[4],"json")!=0) CrtSurfFile(argv[2],"json");  
     if(strstr(argv[4],"csv")!=0) CrtSurfFile(argv[2],"csv");  
 
-    logfile.Write("crtsurfdata5 has stopped ... \n");
+    logfile.Write("[INFO] crtsurfdata has stopped. \n");
 
     return 0;
 }
@@ -261,7 +261,7 @@ bool CrtSurfFile(const char *outpath,const char *datafmt)
     // close the file
     File.CloseAndRename();
 
-    logfile.Write("Successfully generated synthetic observation data file %s, Time: %s, Entry number: %d.\n",strFileName,strddatetime,vsurfdata.size());
+    logfile.Write("[INFO] Successfully generated file %s, Time: %s, Entry number: %d.\n",strFileName,strddatetime,vsurfdata.size());
 
     return true;
 }
