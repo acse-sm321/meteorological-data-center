@@ -59,7 +59,9 @@ int main(int argc, char *argv[])
     if (argc != 5)
     {
         printf("[INFO] Using: ./crtsurfdata infile outpath logfile datafmt\n");
-        printf("[INFO] Example: ../bin/crtsurfdata ../ini/stcode.ini ../tmp/surfdata ../log/idc/crtsurfdata.log xml,json,csv\n");
+        printf("[INFO] Example: /root/meteorological-data-center/idc1/bin/crtsurfdata"\
+               "/root/meteorological-data-center/idc1/ini/stcode.ini /root/meteorological-data-center/tmp/surfdata"\
+               "/root/meteorological-data-center/log/idc/crtsurfdata.log xml,json,csv\n");
         // remember to give access to ./log to user
         // chown -R mo:dba /log
 
