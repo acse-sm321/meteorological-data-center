@@ -1,5 +1,5 @@
 /**
- * @file crtsurfdata2.cpp
+ * @file crtsurfdata4.cpp
  * @author Shuheng Mo
  * @brief Generate synthetic station observation data (per minute)
  * @version 0.1
@@ -36,32 +36,37 @@ struct st_surfdata
     int vis;            // visibility
 };
 
+char strddatetime[21];  // observation datetime
+
 vector<struct st_surfdata> vsurfdata; // container for obervation data per minute
+
+vector<struct st_stcode> vstcode; // define a container for the station data
+
+// load the file into the container defined above
+bool LoadSTCode(const char *infile);
 
 // create synthetic observation data per minute
 void CrtSurfData();
 
-// define a container for the station data
-vector<struct st_stcode> vstcode;
-
-// load the file into the container defined above
-bool LoadSTCode(const char *infile);
+// write the synthetic observation data into file
+bool CrtSurfFile(const char *outpath, const char *datafmt);
 
 CLogFile logfile(10); // The maximum of log file is 10 M
 
 int main(int argc, char *argv[])
 {
     /* code */
-    if (argc != 4)
+    if (argc != 5)
     {
-        printf("Using: ./crtsurfdata3 infile outpath logfile\n");
-        printf("Example: /project/idc1/bin/crtsurfdata3 /project/idc1/ini/stcode.ini /tmp/surfdata /project/idc1/log/idc/crtsurfdata3.log\n");
+        printf("Using: ./crtsurfdata4 infile outpath logfile datafmt\n");
+        printf("Example: ../bin/crtsurfdata4 ../ini/stcode.ini ../tmp/surfdata ../log/idc/crtsurfdata4.log xml,json,csv\n");
         // remember to give access to ./log to user
         // chown -R mo:dba /log
 
         printf("infile -> input station data file\n");
         printf("outpath -> generated synthetic observation data file location\n");
         printf("logfile -> running log of current program\n");
+        printf("datafmt -> file of the output data file, xml,json,csv supported and split by \',\' \n");
 
         return -1;
     }
@@ -73,14 +78,20 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    logfile.Write("crtsurfdata3 is running ... \n");
-    if (LoadSTCode(argv[1]) == false)
-        return -1;
+    logfile.Write("crtsurfdata4 is running ... \n");
 
+    // pass the data from files into vstcode container
+    if (LoadSTCode(argv[1]) == false) return -1;
 
+    // generate synthetic observation data
     CrtSurfData();
 
-    logfile.Write("crtsurfdata3 has stopped ... \n");
+    // write the generated synthetic data into files: xml,csv,json
+    if(strstr(argv[4],"xml")!=0) CrtSurfFile(argv[2],"xml");  
+    if(strstr(argv[4],"json")!=0) CrtSurfFile(argv[2],"json");  
+    if(strstr(argv[4],"csv")!=0) CrtSurfFile(argv[2],"csv");  
+
+    logfile.Write("crtsurfdata4 has stopped ... \n");
 
     return 0;
 }
@@ -108,7 +119,7 @@ bool LoadSTCode(const char *infile)
             break;
 
         // print out the data from file
-        logfile.Write("=%s=\n", strBuffer);
+        // logfile.Write("=%s=\n", strBuffer);
 
         // split the line loaded
         CmdStr.SplitToCmd(strBuffer, ",",true);
@@ -142,7 +153,6 @@ void CrtSurfData()
     srand(time(0));
 
     // Get current time and make it as synthetic obs data
-    char strddatetime[21];
     memset(strddatetime,0,sizeof(strddatetime));
     LocalTime(strddatetime,"yyyymmddhh24miss");
 
@@ -170,4 +180,48 @@ void CrtSurfData()
     }
     // GDB
     // printf("aaa\n");
+}
+
+// write the synthetic data in container vsurfdata into file
+bool CrtSurfFile(const char *outpath,const char *datafmt)
+{
+    CFile File;
+
+    // generate file name: SURF_ZH_{datetime}.csv
+    char strFileName[301];
+    sprintf(strFileName,"%s/SURF_ZH_%s_%d.%s",outpath,strddatetime,getpid(),datafmt);
+
+    // open file
+    if(File.OpenForRename(strFileName,"w")==false)
+    {
+        logfile.Write("File.OpenForRename(%s) failed.\n",strFileName);
+        return false;
+    }
+
+    // add title (CSV)
+    if(strcmp(datafmt,"csv")==0)
+    {
+        File.Fprintf("Station ID,Time,Temperature,Relative Humidity,Wind Direction,Wind Speed,Rain Fall,Visibility\n");
+    }
+
+    // loop container to get/write the data
+    for(int ii=0;ii<vsurfdata.size();ii++)
+    {
+        if(strcmp(datafmt,"csv") == 0)
+        {
+            File.Fprintf("%s,%s,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f\n",\
+                vsurfdata[ii].obtid,vsurfdata[ii].ddatetime,vsurfdata[ii].t/10.0,vsurfdata[ii].p/10.0,\
+                vsurfdata[ii].u,vsurfdata[ii].wd,vsurfdata[ii].wf/10.0,vsurfdata[ii].r/10.0,vsurfdata[ii].vis/10.0);
+        }
+
+    }
+
+    // sleep(50); // test whether the tmp file works
+
+    // close the file
+    File.CloseAndRename();
+
+    logfile.Write("Successfully generated synthetic observation data file %s, Time: %s, Entry number: %d.\n",strFileName,strddatetime,vsurfdata.size());
+
+    return true;
 }

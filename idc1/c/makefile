@@ -4,7 +4,7 @@ PUBCPP = /root/meteorological-data-center/public/_public.cpp
 
 CFLAGS = -g
 
-all:crtsurfdata1 crtsurfdata2 crtsurfdata3
+all:crtsurfdata1 crtsurfdata2 crtsurfdata3 crtsurfdata4
 
 crtsurfdata1:crtsurfdata1.cpp
 	g++ $(CFLAGS) -o crtsurfdata1 crtsurfdata1.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
@@ -18,7 +18,13 @@ crtsurfdata3:crtsurfdata3.cpp
 	g++ $(CFLAGS) -o crtsurfdata3 crtsurfdata3.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
 	cp crtsurfdata3 ../bin/.
 
+
+crtsurfdata4:crtsurfdata4.cpp
+	g++ $(CFLAGS) -o crtsurfdata4 crtsurfdata4.cpp  $(PUBINCL) $(PUBCPP) -lm -lc
+	cp crtsurfdata4 ../bin/.
+
 clean:
 	rm crtsurfdata1
 	rm crtsurfdata2
 	rm crtsurfdata3
+	rm crtsurfdata4

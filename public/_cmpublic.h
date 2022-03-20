@@ -54,7 +54,6 @@
 #include <deque>
 #include <algorithm>
 
-// 采用stl标准库的命名空间std
 using namespace std;
 
 #endif
